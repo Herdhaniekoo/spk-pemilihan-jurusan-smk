@@ -1,0 +1,21 @@
+1. JOIN NILAI DAN DATA SISWA
+
+SELECT nilai.*,data_siswa.id_siswa ,data_siswa.nama_siswa, data_siswa.no_daftar FROM data_siswa JOIN nilai ON data_siswa.id_siswa = nilai.id_siswa
+WHERE data_siswa.id_siswa = nilai.id_siswa
+
+2. AMBIL ISI KOLOM PALING MAX
+SELECT max(`C1`) FROM `nilai_jurusan` WHERE id_siswa = 1
+
+//kosongkan tabel bantuang hitung
+        $this->db->truncate('tmp_hitung');
+        //berdasarkan id yang kita kirim di btn hitung
+        $this->db->where('id_siswa', $id);
+        //copy data berdasarkan id ke tmp_hitung
+        $this->db->select("INSERT INTO `tmp_hitung`(`id`,`id_siswa`, `id_jurusan`,`C1`,`C2`,`C3`,`C4`,`C5`,`C6`,`C7`,`C8`) 
+        SELECT `id`,`id_siswa`, `id_jurusan`,`C1`,`C2`,`C3`,`C4`,`C5`,`C6`,`C7`,`C8` 
+        FROM `nilai_jurusan` WHERE `id_siswa` = $id");
+
+        // $maxC1 = "SELECT max(`C1`) FROM `tmp_hitung` WHERE id_siswa = $id";
+        // return $this->db->query($maxC1)->result_array();
+
+3. QUERY COPY DATA DARI NILAI JURUSAN KE TMP HITUNG
